@@ -1,7 +1,22 @@
 from django.shortcuts import render
+from django.views import View
+from .models import *
 
-def home(request):
-  return render(request,'app/home.html')
+# def home(request):
+#   return render(request,'app/home.html')
+
+class Home(View):
+ def get(self,request):
+  topwears=Product.objects.filter(category='TW')
+  bottomwears=Product.objects.filter(category='BW')
+  innerwears=Product.objects.filter(category='IW')
+  
+  return render(request,'app/home.html',{
+   'topwears':topwears,
+   'bottomwears':bottomwears,
+   'innerwears':innerwears
+  })
+  
 
 def product_detail(request):
  return render(request, 'app/productdetail.html')
