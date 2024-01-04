@@ -37,7 +37,7 @@ class Customer(models.Model):
     District=models.CharField(choices=District_Choices,max_length=100)
 
     def __str__(self):
-        return self.id
+        return str(self.id)
     
 Category_Choices=(
     ('M','Mobiles'),
@@ -57,7 +57,7 @@ class Product(models.Model):
     product_image=models.ImageField(upload_to='productimg')
 
     def __str__(self):
-        return self.id
+        return str(self.id)
     
 class Cart(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)
@@ -65,7 +65,7 @@ class Cart(models.Model):
     quantity=models.PositiveIntegerField(default=1)
 
     def __str__(self):
-        return self.id    
+        return str(self.id) 
     
 Status_Choices=(
     ('Accepted','Accepted'),
@@ -85,4 +85,4 @@ class Order(models.Model):
     status=models.CharField(choices=Status_Choices,max_length=100,default='pending')
 
     def __str__(self):
-        return self.id
+        return str(self.id)
