@@ -50,7 +50,7 @@
  <!-- Slider 1 -->
  <div class="owl-carousel" id="slider1">
   {% for top in topwears %}
-   <a href="{% url 'product-detail' %}" class="btn"><div class="item"><img src="{{top.product_image.url}}" alt="" height="200px"><span class="fw-bold">{{top.title}}</span><br><span class="fs-5">{{top.discounted_price}}</span></div></a>
+   <a href="{% url 'product' top.id%}" class="btn"><div class="item"><img src="{{top.product_image.url}}" alt="" height="200px"><span class="fw-bold">{{top.title}}</span><br><p>Rs.{{top.discounted_price}}<small class="fw-light text-decoration-line-through text-muted">Rs.{{top.selling_price}}</small></p></div></a>
 
   {% endfor %}
   
@@ -98,7 +98,7 @@
   <!-- Slider 2 -->
   <div class="owl-carousel" id="slider2">
    {% for bottom in bottomwears %}
-    <div class="item"><img src="{{bottom.product_image.url}}" alt="" height="200px"><span class="fw-bold">{{bottom.title}}</span><br><span class="fs-5">{{bottom.discounted_price}}</span></div>
+   <a href="{% url 'product' bottom.id%}" class="btn"><div class="item"><img src="{{bottom.product_image.url}}" alt="" height="200px"><span class="fw-bold">{{bottom.title}}</span><br><p>Rs.{{bottom.discounted_price}}<small class="fw-light text-decoration-line-through text-muted">Rs.{{bottom.selling_price}}</small></p></div></a>
  
  
      
@@ -113,7 +113,7 @@
  <!-- Slider 2 -->
  <div class="owl-carousel" id="slider2">
   {% for inner in innerwears %}
-   <div class="item"><img src="{{inner.product_image.url}}" alt="" height="200px"><span class="fw-bold">{{inner.title}}</span><br><span class="fs-5">{{inner.discounted_price}}</span></div>
+   <a href="{% url 'product' inner.id%}" class="btn"><div class="item"><img src="{{inner.product_image.url}}" alt="" height="200px"><span class="fw-bold">{{inner.title}}</span><br><p>Rs.{{inner.discounted_price}}<small class="fw-light text-decoration-line-through text-muted">Rs.{{inner.selling_price}}</small></p></div></a>
 
 
     

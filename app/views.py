@@ -1,9 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 from django.views import View
 from .models import *
 
-# def home(request):
-#   return render(request,'app/home.html')
 
 class Home(View):
  def get(self,request):
@@ -16,10 +14,20 @@ class Home(View):
    'bottomwears':bottomwears,
    'innerwears':innerwears
   })
+ 
+class ProductView(View):
+ def get(self,request,pk):
+  product_instance=get_object_or_404(Product,pk=pk)
+
+  return render(request, 'app/productdetail.html',{
+    'product':product_instance
+  })
+
+   
   
 
-def product_detail(request):
- return render(request, 'app/productdetail.html')
+# def product_detail(request):
+#  return render(request, 'app/productdetail.html')
 
 def add_to_cart(request):
  return render(request, 'app/addtocart.html')
