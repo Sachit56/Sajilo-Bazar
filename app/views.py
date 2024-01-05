@@ -57,6 +57,14 @@ class MobileView(View):
   elif data=='Google' or data=='Apple':
    mobile_instance=Product.objects.filter(category='M').filter(brand=data)  
 
+  elif data=='below':
+   mobile_instance=Product.objects.filter(category='M').filter(discounted_price__lt=100000)
+
+  elif data=='above':
+   mobile_instance=Product.objects.filter(category='M').filter(discounted_price__gt=100000) 
+
+
+
   return render(request, 'app/mobile.html',{
    'mobile':mobile_instance
   })
