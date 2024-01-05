@@ -47,8 +47,20 @@ def orders(request):
 def change_password(request):
  return render(request, 'app/changepassword.html')
 
-def mobile(request):
- return render(request, 'app/mobile.html')
+# def mobile(request):
+#  return render(request, 'app/mobile.html')
+
+class MobileView(View):
+ def get(self,request,data=None):
+  if data==None:
+    mobile_instance=Product.objects.filter(category='M')
+  elif data=='Google' or data=='Apple':
+   mobile_instance=Product.objects.filter(category='M').filter(brand=data)  
+
+  return render(request, 'app/mobile.html',{
+   'mobile':mobile_instance
+  })
+
 
 def login(request):
  return render(request, 'app/login.html')

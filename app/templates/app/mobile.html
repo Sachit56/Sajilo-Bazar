@@ -5,10 +5,32 @@
 <div class="container my-5">
  <div class="row">
   <div class="col-sm-3">
-   Side Bar for Mobile filter
+    <div class="list-group">
+        <a href="{% url 'mobile'%}" class="list-group-item list-group-item-action" aria-current="true">All Mobiles</a>
+        <a href="{% url 'mobiledata' 'Google'%}" class="list-group-item list-group-item-action" aria-current="true">Google</a>
+        <a href="{% url 'mobiledata' 'Apple'%}" class="list-group-item list-group-item-action" aria-current="true">Apple</a>
+
+
+    </div>
+   
+    
+   
+   <!-- Slider 2 -->
+   <div class="owl-carousel" id="slider2">
+
+  
+   </div>
   </div>
   <div class="col-sm-8 offset-sm-1">
-   Mobile Product List
+
+    {% for m in mobile %}
+     <a href="{% url 'product' m.id%}" class="btn"><div class="item"><img src="{{m.product_image.url}}" alt="" height="200px"><span class="fw-bold">{{m.title}}</span><br><p>Rs.{{m.discounted_price}}<small class="fw-light text-decoration-line-through text-muted">Rs.{{m.selling_price}}</small></p></div></a>
+ 
+ 
+     
+    {% endfor %}
+
+
   </div>
  </div>
 </div>
