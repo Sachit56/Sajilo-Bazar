@@ -17,7 +17,3 @@ class LoginForm(AuthenticationForm):
     username=forms.CharField(label='Username', max_length=100,widget=forms.TextInput({'autofocus':True,'class':'form-control'}))
     password=forms.CharField(label='Password',max_length=100,widget=forms.PasswordInput({'autocomplete':'current-password','class':'form-control'}))
 
-    class Meta:
-        model=User
-
-        fields=['username','password']
