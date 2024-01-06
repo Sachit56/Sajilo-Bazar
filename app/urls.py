@@ -16,6 +16,7 @@ urlpatterns = [
     path('mobile/', views.MobileView.as_view(), name='mobile'),
     path('mobile/<slug:data>/',views.MobileView.as_view(),name='mobiledata'),
     path('login/', auth_views.LoginView.as_view(template_name='app/login.html', authentication_form=LoginForm), name='login'),
+    path('logout/',auth_views.LogoutView.as_view(next_page='home'),name='logout'),
     path('registration/', views.RegistrationView.as_view(), name='registration'),
     path('checkout/', views.checkout, name='checkout'),
 ]+ static(settings.MEDIA_URL,
