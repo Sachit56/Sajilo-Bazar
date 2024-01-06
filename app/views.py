@@ -48,6 +48,9 @@ def orders(request):
 def passdone(request):
  return render(request,'app/passwordchangedone.html')
 
+def ResetPasswordDoneView(request):
+ return render(request,'app/resetpassworddone.html')
+
 class MobileView(View):
  def get(self,request,data=None):
   if data==None:
