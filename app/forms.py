@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm,PasswordChangeForm
+from django.contrib.auth import password_validation
 
 class RegistrationForm(UserCreationForm):
     username=forms.CharField(label='Username',max_length=100,widget=forms.TextInput({'class':'form-control'}))
@@ -18,6 +19,6 @@ class LoginForm(AuthenticationForm):
     password=forms.CharField(label='Password',max_length=100,widget=forms.PasswordInput({'autocomplete':'current-password','class':'form-control'}))
 
 class PasswordChangeForm(PasswordChangeForm):
-    old_password=forms.CharField(label='Old Password',max_length=100,widget=forms.PasswordInput({'autocomplete':'current-password','class':'form-control'}))
-    new_password1=forms.CharField(label='New Password',max_length=100,widget=forms.PasswordInput({'autocomplete':'current-password','class':'form-control'}))
+    old_password=forms.CharField(label='Old Password',strip=False,max_length=100,widget=forms.PasswordInput({'autocomplete':'current-password','class':'form-control'}))
+    new_password1=forms.CharField(label='New Password',help_text=password_validation,max_length=100,widget=forms.PasswordInput({'autocomplete':'current-password','class':'form-control'}))
     new_password2=forms.CharField(label='Repeat New Password',max_length=100,widget=forms.PasswordInput({'autocomplete':'current-password','class':'form-control'}))
