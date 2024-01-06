@@ -2,7 +2,7 @@ from django.shortcuts import render,get_object_or_404
 from django.views import View
 from .models import *
 from .forms import RegistrationForm
-
+from django.contrib import messages
 
 class Home(View):
  def get(self,request):
@@ -80,14 +80,17 @@ def customerregistration(request):
 class RegistrationView(View):
  def get(self,request):
   form=RegistrationForm()
+  
 
   return render(request, 'app/customerregistration.html',{
-   'form':form
+   'form':form,
+   
   })
  
  def post(self,request):
   form=RegistrationForm(request.POST)
   if form.is_valid():
+   messages.success(request,'Registered Successfully!')
    form.save()
 
   return render(request, 'app/customerregistration.html',{

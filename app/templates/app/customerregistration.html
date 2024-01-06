@@ -9,10 +9,18 @@
    <hr>
 
    <form action="" method="post" novalidate class="shadow p-5">
+      {% csrf_token %}
+      {% if messages %}
+        {% for msg in messages %}
+          <p class="alert alert-success mb-5">{{msg}}</p>
+          
+        {% endfor %}
+        
+      {% endif %}
       {{form.as_p}}
   
     <div class="text-end">
-     <button type="button" class="btn btn-danger">Submit</button>
+     <input class="btn btn-danger" type="submit" value="Register">
     </div>
     <br>
     <div class="text-center text-primary fw-bold"><small>Existing User ? <a href="{% url 'login' %}"
