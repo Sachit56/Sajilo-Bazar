@@ -14,7 +14,7 @@ urlpatterns = [
     path('mobile/', views.MobileView.as_view(), name='mobile'),
     path('mobile/<slug:data>/',views.MobileView.as_view(),name='mobiledata'),
     path('login/', views.login, name='login'),
-    path('registration/', views.customerregistration, name='customerregistration'),
+    path('registration/', views.RegistrationView.as_view(), name='registration'),
     path('checkout/', views.checkout, name='checkout'),
 ]+ static(settings.MEDIA_URL,
           document_root=settings.MEDIA_ROOT)

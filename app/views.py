@@ -1,6 +1,7 @@
 from django.shortcuts import render,get_object_or_404
 from django.views import View
 from .models import *
+from .forms import RegistrationForm
 
 
 class Home(View):
@@ -75,6 +76,30 @@ def login(request):
 
 def customerregistration(request):
  return render(request, 'app/customerregistration.html')
+
+class RegistrationView(View):
+ def get(self,request):
+  form=RegistrationForm()
+
+  return render(request, 'app/customerregistration.html',{
+   'form':form
+  })
+ 
+ def post(self,request):
+  form=RegistrationForm(request.POST)
+  if form.is_valid():
+   form.save()
+
+  return render(request, 'app/customerregistration.html',{
+   'form':form
+  })
+ 
+
+
+
+  
+
+
 
 def checkout(request):
  return render(request, 'app/checkout.html')
