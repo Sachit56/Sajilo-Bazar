@@ -74,8 +74,6 @@ class MobileView(View):
 def login(request):
  return render(request, 'app/login.html')
 
-def customerregistration(request):
- return render(request, 'app/customerregistration.html')
 
 class RegistrationView(View):
  def get(self,request):
