@@ -16,6 +16,7 @@ urlpatterns = [
     path('passwordchangedone/',views.passdone,name='passwordchangedone'),
     path('resetpassword/',auth_views.PasswordResetView.as_view(template_name='app/resetpassword.html',form_class=PasswordResetForm,success_url='/resetpassworddone/'),name='resetpassword'),
     path('resetpassworddone/',views.ResetPasswordDoneView,name='resetpassworddone'),
+    path('resetpasswordconfirm/',auth_views.PasswordResetConfirmView.as_view(template_name='app/resetpasswordconfirm.html',form_class=PasswordResetForm,success_url='/resetpassworddone/'),name='resetpassword'),
     path('mobile/', views.MobileView.as_view(), name='mobile'),
     path('mobile/<slug:data>/',views.MobileView.as_view(),name='mobiledata'),
     path('login/', auth_views.LoginView.as_view(template_name='app/login.html', authentication_form=LoginForm), name='login'),
