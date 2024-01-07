@@ -1,7 +1,7 @@
 from django.shortcuts import render,get_object_or_404
 from django.views import View
 from .models import *
-from .forms import RegistrationForm
+from .forms import RegistrationForm,CustomerForm
 from django.contrib import messages
 
 class Home(View):
@@ -38,6 +38,15 @@ def buy_now(request):
 
 def profile(request):
  return render(request, 'app/profile.html')
+
+class ProfileView(View):
+ def get(self,request):
+  form=CustomerForm()
+
+  return render(request,'app/profile.html',{
+   'form':form
+  })
+
 
 def address(request):
  return render(request, 'app/address.html')
