@@ -44,8 +44,33 @@ class ProfileView(View):
   form=CustomerForm()
 
   return render(request,'app/profile.html',{
-   'form':form
+   'form':form,
+   'active':'btn-primary'
   })
+ def post(self,request):
+  form=CustomerForm(request.POST)
+
+  if form.is_valid():
+   user=request.user
+   name=form.cleaned_data['name']
+   locality=form.cleaned_data['locality']
+   city=form.cleaned_data['city']
+   district=form.cleaned_data['district']
+   zipcode=form.cleaned_data['zipcode']
+
+   reg=Customer(user=user,name=name,locality=locality,city=city,district=district,zipcode=zipcode)
+
+   reg.save()
+   messages.success(request,'Profile Updated Sucessfully!')
+
+  return render(request,'app/profile.html',{
+   'form':form,
+   'active':'btn-primary',
+   
+  }) 
+
+
+
 
 
 def address(request):
