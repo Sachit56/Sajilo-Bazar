@@ -124,6 +124,9 @@ from django.urls import reverse_lazy
 
 LOGOUT_REDIRECT_URL = reverse_lazy('home')
 
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
