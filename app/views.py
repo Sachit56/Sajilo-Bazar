@@ -4,6 +4,7 @@ from django.views import View
 from .models import *
 from .forms import RegistrationForm,CustomerForm
 from django.contrib import messages
+from django.db.models import Q
 
 class Home(View):
  def get(self,request):
@@ -58,7 +59,30 @@ def showcart(request):
    'shipping_amount':shipping_amount
    })
 
+def pluscart(request):
+ if request.GET:
+  user=request.user
+  product_id=request.GET.get('product_id')
+  c=Cart.objects.get(Q(product=product_id) & Q(user=request.user))
+  c.quantity+=1
+  c.save()
 
+  amount=0
+  shipping_amount=70
+  total_amount=0
+
+  c_list=[p for p in Cart.objects.all() if p.user==user]
+
+  for items in c_list:
+   amt=items.quantity*items.product.discounted_price
+   amount+=amt
+   total_amount=amount+shipping_amount
+
+   
+
+
+
+  
 
 
 def buy_now(request):
