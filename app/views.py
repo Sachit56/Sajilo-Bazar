@@ -38,9 +38,23 @@ def showcart(request):
  if request.user.is_authenticated:
   user=request.user
   cart=Cart.objects.filter(user=user)
+  amount=0
+  shipping_amount=70
+  total_amount=0
+
+  cart_list=[p for p in Cart.objects.all() if p.user==user]
+  if len(cart_list)!=0:
+   for items in cart_list:
+    amt=items.quantity*items.product.discounted_price
+    amount+=amt
+    total_amount=amount+shipping_amount
+   
 
   return render(request,'app/addtocart.html',{
-   'carts':cart
+   'carts':cart,
+   'total_amount':total_amount,
+   'amount':amount,
+   'shipping_amount':shipping_amount
    })
 
 
