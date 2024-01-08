@@ -48,7 +48,8 @@ def showcart(request):
     amt=items.quantity*items.product.discounted_price
     amount+=amt
     total_amount=amount+shipping_amount
-   
+  else:
+   return render(request,'app/emptycart.html') 
 
   return render(request,'app/addtocart.html',{
    'carts':cart,
