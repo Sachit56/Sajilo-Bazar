@@ -1,4 +1,5 @@
-from django.shortcuts import render,get_object_or_404
+from django.shortcuts import render,get_object_or_404,redirect
+from django.urls import reverse_lazy
 from django.views import View
 from .models import *
 from .forms import RegistrationForm,CustomerForm
@@ -24,11 +25,6 @@ class ProductView(View):
     'product':product_instance
   })
 
-   
-  
-
-# def product_detail(request):
-#  return render(request, 'app/productdetail.html')
 
 def add_to_cart(request):
  return render(request, 'app/addtocart.html')
@@ -40,6 +36,7 @@ def profile(request):
  return render(request, 'app/profile.html')
 
 class ProfileView(View):
+
  def get(self,request):
   form=CustomerForm()
 
@@ -62,6 +59,8 @@ class ProfileView(View):
 
    reg.save()
    messages.success(request,'Profile Updated Sucessfully!')
+   return redirect('address')
+   
 
   return render(request,'app/profile.html',{
    'form':form,
@@ -73,12 +72,14 @@ class ProfileView(View):
 
 
 
-def address(request):
- address=Customer.objects.filter(user=request.user)
+class AddressView(View):
+ def get(self,request):
+   address=Customer.objects.filter(user=request.user)
 
- return render(request, 'app/address.html',{
-  'address':address
- })
+   return render(request, 'app/address.html',{
+      'address':address
+
+  })
 
 def orders(request):
  return render(request, 'app/orders.html')
