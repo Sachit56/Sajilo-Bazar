@@ -71,4 +71,39 @@
         </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
+<script>
+    $(document).ready(function() {
+        $(".plus-cart").click(function() {
+            var product_id = $(this).attr("pid");
+            var quantity_span = $("#quantity_" + product_id);
+            var current_quantity = parseInt(quantity_span.text());
+    
+            quantity_span.text(current_quantity + 1);
+            console.log(product_id);
+    
+            // You can also make an Ajax request here to update the quantity in the server
+            // Example: sendAjaxRequest(product_id, current_quantity + 1);
+        });
+    
+        // Event handler for the minus button
+        $(".minus-cart").click(function() {
+            var product_id = $(this).attr("pid");
+            var quantity_span = $("#quantity_" + product_id);
+            var current_quantity = parseInt(quantity_span.text());
+    
+            // Ensure the quantity doesn't go below 1
+            if (current_quantity > 1) {
+                // Update quantity in the span and any other logic you need to do
+                quantity_span.text(current_quantity - 1);
+    
+                // You can also make an Ajax request here to update the quantity in the server
+                // Example: sendAjaxRequest(product_id, current_quantity - 1);
+            }
+        });
+    });
+    </script>
+
 {% endblock main-content %}
