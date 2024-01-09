@@ -9,7 +9,7 @@
     <hr>
       <div class="card mb-2">
         <div class="card-body">
-          <h5>Product: Product 1</h5>
+          <h5>Product: {{cart.product.title}}</h5>
           <p>Quantity: 2</p>
           <p class="fw-bold">Price: 100.00</p>
         </div>
@@ -22,8 +22,8 @@
     <form action="">
       <div class="card">
         <div class="card-body">
-        <h5>Sonam Kumari</h5>
-        <p>Hirapur Dhanbad Jharkahnd</p>
+        <h5 class="text-capitalize">{{request.user}}</h5>
+        <p>{{request.city}} Dhanbad Jharkahnd</p>
         </div>
       </div>
         <div class="form-check mt-2 mb-5">
