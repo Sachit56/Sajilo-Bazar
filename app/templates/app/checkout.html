@@ -7,25 +7,56 @@
   <div class="col-sm-6">
     <h4>Order Summary</h4>
     <hr>
-      <div class="card mb-2">
-        <div class="card-body">
-          <h5>Product: {{cart.product.title}}</h5>
-          <p>Quantity: 2</p>
-          <p class="fw-bold">Price: 100.00</p>
-        </div>
+    <div class="card mb-2">
+      <div class="card-body">
+        {% for cart in carts %}
+        <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+          <div>
+              <h5 class="mb-0">Product: {{cart.product.title}}</h5>
+              <p class="mb-0">Quantity: {{cart.quantity}}</p>
+          </div>
+          <span>Rs. {{cart.product.discounted_price}}</span>
+        </li>
+          <!-- <h5>Product: {{cart.product.title}} <span>{{cart.product.discounted_price}}</span></h5>
+          <p>Quantity: {{cart.quantity}}</p> -->
+        {% endfor %}
+        <ul class="list-group">
+          <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">Amount<span id="amount">{{amount}}</span></li>
+          <li class="list-group-item d-flex justify-content-between align-items-center px-0">Shipping Cost<span>Rs. {{shipping_amount}}</span></li>
+          <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+              <div>
+                  <strong>Total</strong> <small>(including VAT)</small>
+              </div>
+              <span><strong id="total_amount">Rs. {{total_amount}}</strong></span>
+          </li>
+        </ul>
       </div>
-    <small>Term and Condition: Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, ullam saepe! Iure optio repellat dolor velit, minus rem. Facilis cumque neque numquam laboriosam, accusantium adipisci nisi nihil in et quis?</small>
+    </div>
+          
+    <small>
+      Terms and Conditions
+      
+      Welcome to Sajilo Bazar! By using our online shopping platform, you agree to the following terms and conditions. Please read them carefully before placing an order.
+      
+      We offer a variety of products and services for online purchase. While we strive to provide accurate product information, we do not guarantee its completeness or accuracy. Prices, product descriptions, and availability are subject to change without notice.
+      
+      To place an order, you must be at least 18 years old and possess a valid credit or debit card. Upon order placement, you will receive an email confirmation. However, this confirmation does not guarantee the acceptance of your order. We reserve the right to refuse or cancel an order for any reason.
+      
+      Payment is due upon order placement, and we use secure payment gateways for processing. Shipping costs are calculated based on destination and product weight. The risk of loss and title pass to you upon delivery.
+      
+      For returns and refunds, please refer to our Return Policy. User accounts are required for certain website features, and you are responsible for maintaining the confidentiality of your account.</small>
   </div>
   <div class="col-sm-4 offset-sm-1">
     <h4>Select Shipping Address</h4>
     <hr>
-    <form action="">
-      <div class="card">
-        <div class="card-body">
-        <h5 class="text-capitalize">{{request.user}}</h5>
-        <p>{{request.city}} Dhanbad Jharkahnd</p>
+    {% for customer in customers %}
+      <form action="" method="post">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="text-capitalize">{{customer.user}}</h5>
+            <p>Address: {{customer.city}},{{customer.locality}}</p>
+          </div>
         </div>
-      </div>
         <div class="form-check mt-2 mb-5">
           <input class="form-check-input" type="radio" value="">
           <label class="form-check-label fw-bold" for="">
@@ -35,7 +66,8 @@
           <button type="submit" class="btn btn-warning mt-3 px-5 fw-bold">Continue</button>
         </div>
       </form>
-    </div>
+    {% endfor %}
   </div>
+ </div>
 </div>
 {% endblock main-content %}

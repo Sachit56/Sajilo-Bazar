@@ -140,18 +140,6 @@ def removecart(request):
     }   
     return JsonResponse(data)
 
-
- 
-
-  
-
-   
-
-
-
-  
-
-
 def buy_now(request):
  return render(request, 'app/buynow.html')
 
@@ -261,4 +249,25 @@ class RegistrationView(View):
 
 
 def checkout(request):
- return render(request, 'app/checkout.html')
+ user=request.user
+ customers=Customer.objects.filter(user=user)
+ carts=Cart.objects.filter(user=user)
+ amount=0
+ total_amount=0
+ shipping_amount=70
+
+ cart_list=[p for p in Cart.objects.all() if p.user==user]
+
+ for items in cart_list:
+  amt=items.quantity*items.product.discounted_price
+  amount+=amt
+  total_amount=amount+shipping_amount
+
+  
+ return render(request, 'app/checkout.html',{
+  'amount':amount,
+  'total_amount':total_amount,
+  'customers':customers,
+  'carts':carts,
+  'shipping_amount':shipping_amount
+ })
