@@ -114,6 +114,34 @@ def minuscart(request):
   }
 
   return JsonResponse(data)
+ 
+ 
+def removecart(request):
+  if request.GET:
+    user=request.user
+    product_id=request.GET.get('product_id')
+    c=Cart.objects.get(Q(product=product_id) & Q(user=user))
+    c.delete()
+    amount=0
+    shipping_amount=70
+    total_amount=0
+
+    c_list=[p for p in Cart.objects.all() if p.user==user]
+
+    for items in c_list:
+      amt=items.quantity*items.product.discounted_price
+      amount+=amt
+      total_amount=amount+shipping_amount
+
+    data={
+    'amount':amount,
+    'shipping_amount':shipping_amount,
+    'total_amount':total_amount
+    }   
+    return JsonResponse(data)
+
+
+ 
 
   
 
