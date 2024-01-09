@@ -269,5 +269,6 @@ def checkout(request):
   'total_amount':total_amount,
   'customers':customers,
   'carts':carts,
-  'shipping_amount':shipping_amount
+  'shipping_amount':shipping_amount,
+
  })

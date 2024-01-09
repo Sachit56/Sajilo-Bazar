@@ -14,6 +14,7 @@
           <div>
               <h5 class="mb-0">Product: {{cart.product.title}}</h5>
               <p class="mb-0">Quantity: {{cart.quantity}}</p>
+              <p class="mb-0">Cost: Rs. {{cart.total_cost}}</p>
           </div>
           <span>Rs. {{cart.product.discounted_price}}</span>
         </li>
@@ -34,7 +35,8 @@
     </div>
           
     <small>
-      Terms and Conditions
+      <h5>Terms and Conditions</h5>
+
       
       Welcome to Sajilo Bazar! By using our online shopping platform, you agree to the following terms and conditions. Please read them carefully before placing an order.
       
@@ -48,25 +50,30 @@
   </div>
   <div class="col-sm-4 offset-sm-1">
     <h4>Select Shipping Address</h4>
-    <hr>
-    {% for customer in customers %}
-      <form action="" method="post">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="text-capitalize">{{customer.user}}</h5>
-            <p>Address: {{customer.city}},{{customer.locality}}</p>
+    <form action="" method="post">
+      <hr>
+      {% for customer in customers %}
+        <form action="" method="post">
+          {% csrf_token %}
+          <div class="card">
+            <div class="card-body">
+              <h5 class="text-capitalize">{{customer.user}}</h5>
+              <p>Address: {{customer.city}},{{customer.locality}}</p>
+            </div>
           </div>
-        </div>
-        <div class="form-check mt-2 mb-5">
-          <input class="form-check-input" type="radio" value="">
-          <label class="form-check-label fw-bold" for="">
-            Address: 1 </label>
-        </div>
-        <div class="text-end">
-          <button type="submit" class="btn btn-warning mt-3 px-5 fw-bold">Continue</button>
-        </div>
-      </form>
-    {% endfor %}
+          <div class="form-check mt-2 mb-5">
+            <input class="form-check-input" type="radio" value="">
+            <label class="form-check-label fw-bold" for="">
+              Address: 1 </label>
+          </div>
+          <div class="text-end">
+            <button type="submit" class="btn btn-warning mt-3 px-5 fw-bold">Continue</button>
+          </div>
+        </form>
+      {% endfor %}
+      
+    </form>
+
   </div>
  </div>
 </div>
