@@ -5,6 +5,7 @@ from .models import *
 from .forms import RegistrationForm,CustomerForm
 from django.contrib import messages
 from django.db.models import Q
+from django.http import JsonResponse
 
 class Home(View):
  def get(self,request):
@@ -77,6 +78,15 @@ def pluscart(request):
    amt=items.quantity*items.product.discounted_price
    amount+=amt
    total_amount=amount+shipping_amount
+   data={
+        'quantity':c.quantity,
+      'amount':amount,
+      'total_amount':total_amount,
+      'shipping_amount':shipping_amount
+   }
+   return JsonResponse(data)
+
+    
 
    
 
