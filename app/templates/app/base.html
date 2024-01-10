@@ -29,7 +29,7 @@
     </style>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
      <div class="container">
        <a class="navbar-brand" href="/">Sajilo Bazaar</a>
        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,9 +59,9 @@
              </ul>
            </li>
          </ul>
-         <form class="d-flex">
+         <form action="/address" class="d-flex">
            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-           <button class="btn btn-warning" type="submit">S</button>
+           <button class="btn btn-warning text-capitalize" type="submit">{{ request.user.username|first }}</button>
          </form>
          <div>
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
