@@ -188,7 +188,27 @@ class AddressView(View):
   })
 
 def orders(request):
- return render(request, 'app/orders.html')
+ if request.user.is_authenticated:
+  user=request.user
+  order=Order.objects.filter(user=user)
+  amount=0
+  shipping_amount=70
+  total_amount=0
+
+  cart_list=[p for p in Order.objects.all() if p.user==user]
+
+  for items in cart_list:
+   amt=items.quantity*items.product.discounted_price
+   amount+=amt
+   total_amount=amount+shipping_amount
+   
+
+ return render(request, 'app/orders.html',{
+  'amount':amount,
+  'total_amount':total_amount,
+  'shipping_amount':shipping_amount,
+  'orders':order
+ })
 
 def passdone(request):
  return render(request,'app/passwordchangedone.html')
