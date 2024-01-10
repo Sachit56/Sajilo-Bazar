@@ -6,6 +6,7 @@ from .forms import RegistrationForm,CustomerForm
 from django.contrib import messages
 from django.db.models import Q
 from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
 
 class Home(View):
  def get(self,request):
@@ -27,7 +28,7 @@ class ProductView(View):
     'product':product_instance
   })
 
-
+@login_required
 def add_to_cart(request):
  user=request.user
  product_id=request.GET.get('product_id')
@@ -36,6 +37,7 @@ def add_to_cart(request):
 
  return redirect('/showcart')
 
+@login_required
 def showcart(request):
  if request.user.is_authenticated:
   user=request.user
@@ -60,6 +62,7 @@ def showcart(request):
    'shipping_amount':shipping_amount
    })
 
+@login_required
 def pluscart(request):
  if request.GET:
   user=request.user
@@ -86,7 +89,7 @@ def pluscart(request):
   }
   return JsonResponse(data)
 
-    
+@login_required    
 def minuscart(request):
  if request.GET:
   user=request.user
@@ -115,7 +118,7 @@ def minuscart(request):
 
   return JsonResponse(data)
  
- 
+@login_required 
 def removecart(request):
   if request.GET:
     user=request.user
@@ -142,6 +145,7 @@ def removecart(request):
 
 def buy_now(request):
  return render(request, 'app/buynow.html')
+
 
 
 class ProfileView(View):
@@ -186,7 +190,9 @@ class AddressView(View):
       'address':address
 
   })
+ 
 
+@login_required
 def orders(request):
  if request.user.is_authenticated:
   user=request.user
@@ -215,6 +221,8 @@ def passdone(request):
 
 def ResetPasswordDoneView(request):
  return render(request,'app/resetpassworddone.html')
+
+
 
 class MobileView(View):
  def get(self,request,data=None):
@@ -256,6 +264,8 @@ class RegistrationView(View):
    'form':form
   })
  
+
+@login_required
 def checkout(request):
  user=request.user
  customers=Customer.objects.filter(user=user)
@@ -281,6 +291,7 @@ def checkout(request):
 
  })
 
+@login_required
 def paymentView(request):
  user=request.user
  customer_id=request.GET.get('customer_id')
