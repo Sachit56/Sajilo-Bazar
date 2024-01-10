@@ -143,8 +143,6 @@ def removecart(request):
 def buy_now(request):
  return render(request, 'app/buynow.html')
 
-def profile(request):
- return render(request, 'app/profile.html')
 
 class ProfileView(View):
 
@@ -178,9 +176,6 @@ class ProfileView(View):
    'active':'btn-primary',
    
   }) 
-
-
-
 
 
 class AddressView(View):
@@ -241,13 +236,6 @@ class RegistrationView(View):
    'form':form
   })
  
-
-
-
-  
-
-
-
 def checkout(request):
  user=request.user
  customers=Customer.objects.filter(user=user)
@@ -272,3 +260,15 @@ def checkout(request):
   'shipping_amount':shipping_amount,
 
  })
+
+def paymentView(request):
+ user=request.user
+ customer_id=request.GET.get('customer_id')
+ customer=Customer.objects.get(id=customer_id)
+ cart=Cart.objects.filter(user=user)
+
+ for c in cart:
+  Order(customer=customer,quantity=c.quantity,user=user,product=c.product).save()
+  c.delete()
+
+ return redirect('/orders')
