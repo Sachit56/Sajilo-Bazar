@@ -1,3 +1,4 @@
+from itertools import product
 from django.shortcuts import render,get_object_or_404,redirect
 from django.urls import reverse_lazy
 from django.views import View
@@ -23,9 +24,13 @@ class Home(View):
 class ProductView(View):
  def get(self,request,pk):
   product_instance=get_object_or_404(Product,pk=pk)
+  items_in_cart=False
+  items_in_cart=Cart.objects.filter(Q(product=product_instance.id) &
+                                    Q(user=request.user))
 
   return render(request, 'app/productdetail.html',{
-    'product':product_instance
+    'product':product_instance,
+    'items_in_cart':items_in_cart
   })
 
 @login_required
