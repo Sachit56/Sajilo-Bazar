@@ -268,7 +268,7 @@ def paymentView(request):
  cart=Cart.objects.filter(user=user)
 
  for c in cart:
-  Order(customer=customer,quantity=c.quantity,user=user,product=c.product).save()
+  Order(customer=customer,user=user,quantity=c.quantity,product=c.product).save()
   c.delete()
 
  return redirect('/orders')

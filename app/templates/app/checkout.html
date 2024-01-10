@@ -50,10 +50,11 @@
   </div>
   <div class="col-sm-4 offset-sm-1">
     <h4>Select Shipping Address</h4>
-    <form action="/orders/" method="post">
+    <form action="/paymentdone" class="d-inline">
+      {% csrf_token %}
       <hr>
       {% for customer in customers %}
-          {% csrf_token %}
+         
           <div class="card">
             <div class="card-body">
               <h5 class="text-capitalize">{{customer.user}}</h5>
